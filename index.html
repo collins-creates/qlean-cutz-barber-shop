@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Cuts Barbershop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">Qlean Cutz</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Qlean Cutz Barbershop</h1>
+            <p>Professional Grooming Services</p>
+            <a href="#contact" class="btn">Book Now</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-cut"></i>
+                    <h3>Classic Haircut</h3>
+                    <p>Professional haircut with style consultation</p>
+                    <span class="price">KSh 500</span>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-razor"></i>
+                    <h3>Beard Grooming</h3>
+                    <p>Beard trim, shape and style with hot towel</p>
+                    <span class="price">KSh 300</span>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-spa"></i>
+                    <h3>Full Service</h3>
+                    <p>Haircut, beard trim, and facial treatment</p>
+                    <span class="price">KSh 700</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <h2>Our Work</h2>
+        <div class="gallery-grid">
+            <!-- Gallery items will be added via JavaScript -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <h2>About Us</h2>
+                <p>Welcome to Qlean Cutz, where precision meets style. Our skilled barbers are dedicated to providing you with the best grooming experience in Nairobi. We specialize in modern cuts and classic styles, ensuring you leave looking and feeling your best.</p>
+                <p>Located in the heart of the city, we've built a reputation for exceptional service and attention to detail. Our comfortable, professional environment is perfect for your grooming needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Book an Appointment</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Kang'ora Road, Nairobi, Kenya</p>
+                    <div class="rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span>5.0 (5 reviews)</span>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8139999999993!2d36.70059845767172!3d-1.213089729966982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTInNDcuMSJTIDM2wrA0MicwMi4xIkU!5e0!3m2!1sen!2ske!4v1623040000000!5m2!1sen!2ske" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <p><i class="fas fa-phone"></i> 0714 172749</p>
+                    <p><i class="fas fa-envelope"></i> info@qleancutz.co.ke</p>
+                    <div class="business-hours">
+                        <h4><i class="far fa-clock"> Hours</i></h4>
+                        <p>Monday - Saturday: 8:00 AM - 8:00 PM</p>
+                        <p>Sunday: 10:00 AM - 6:00 PM</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <form class="booking-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="tel" placeholder="Your Phone">
+                    <select required>
+                        <option value="">Select Service</option>
+                        <option value="haircut">Classic Haircut - KSh 500</option>
+                        <option value="beard">Beard Grooming - KSh 300</option>
+                        <option value="full">Full Service - KSh 700</option>
+                    </select>
+                    <input type="datetime-local" required>
+                    <button type="submit" class="btn">Book Now</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Qlean Cutz Barbershop. All rights reserved. ISIC: 9602</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
