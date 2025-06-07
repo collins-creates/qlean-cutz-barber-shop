@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            color: #d4af37;
+        }
+        .test-box {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Page</h1>
+    <div class="test-box">
+        <p>If you can see this styled box, then inline CSS is working.</p>
+        <p>This means the issue is with loading the external CSS file.</p>
+    </div>
+    <div class="test-box" style="margin-top: 20px;">
+        <h3>Checking CSS file:</h3>
+        <p id="css-status">Checking if styles.css is accessible...</p>
+    </div>
+    <script>
+        // Check if CSS file loads
+        fetch('styles.css')
+            .then(response => {
+                const status = document.getElementById('css-status');
+                if (response.ok) {
+                    status.innerHTML = '✅ styles.css is accessible and loaded successfully!';
+                    status.style.color = 'green';
+                } else {
+                    status.innerHTML = '❌ Error loading styles.css. Status: ' + response.status;
+                    status.style.color = 'red';
+                }
+            })
+            .catch(error => {
+                const status = document.getElementById('css-status');
+                status.innerHTML = '❌ Network error loading styles.css: ' + error.message;
+                status.style.color = 'red';
+            });
+    </script>
+</body>
+</html>
