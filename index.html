@@ -116,17 +116,19 @@
                         <a href="#"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
-                <form class="booking-form">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <input type="tel" placeholder="Your Phone">
-                    <select required>
+                <form class="booking-form" action="https://formspree.io/f/xpwrqkkp" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <input type="tel" name="phone" placeholder="Your Phone" required>
+                    <select name="service" required>
                         <option value="">Select Service</option>
-                        <option value="haircut">Classic Haircut - KSh 500</option>
-                        <option value="beard">Beard Grooming - KSh 300</option>
-                        <option value="full">Full Service - KSh 700</option>
+                        <option value="Classic Haircut">Classic Haircut - KSh 500</option>
+                        <option value="Beard Grooming">Beard Grooming - KSh 300</option>
+                        <option value="Full Service">Full Service - KSh 700</option>
                     </select>
-                    <input type="datetime-local" required>
+                    <input type="datetime-local" name="appointment_date" required>
+                    <input type="hidden" name="_subject" value="New Booking Request">
+                    <input type="hidden" name="_next" value="https://qlean-cutz-barber-shop.vercel.app/thank-you.html">
                     <button type="submit" class="btn">Book Now</button>
                 </form>
             </div>
