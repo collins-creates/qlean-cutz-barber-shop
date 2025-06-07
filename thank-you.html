@@ -45,9 +45,156 @@
         <div class="thank-you">
             <i class="fas fa-check-circle"></i>
             <h1>Thank You for Your Booking!</h1>
-            <p>We've received your appointment request and will contact you shortly to confirm.</p>
-            <a href="index.html" class="btn">Back to Home</a>
+            <div id="bookingDetails" class="booking-details">
+                <p>Your booking details have been received. Here's a summary:</p>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <span class="detail-label">Name:</span>
+                        <span id="customerName" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Service:</span>
+                        <span id="service" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Date & Time:</span>
+                        <span id="appointmentDate" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Email:</span>
+                        <span id="email" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Phone:</span>
+                        <span id="phone" class="detail-value"></span>
+                    </div>
+                </div>
+                <p class="confirmation-note">We've sent a confirmation to your email. Please arrive 5 minutes before your appointment.</p>
+            </div>
+            <div class="action-buttons">
+                <a href="index.html" class="btn">Back to Home</a>
+                <button onclick="window.print()" class="btn print-btn">
+                    <i class="fas fa-print"></i> Print Confirmation
+                </button>
+            </div>
         </div>
     </div>
+    <script>
+        // Get booking details from session storage
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookingDetails = JSON.parse(sessionStorage.getItem('bookingDetails'));
+            
+            if (bookingDetails) {
+                // Format the datetime for display
+                const date = new Date(bookingDetails.appointment_date);
+                const formattedDate = date.toLocaleString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                // Update the DOM with booking details
+                document.getElementById('customerName').textContent = bookingDetails.name || 'Not provided';
+                document.getElementById('service').textContent = bookingDetails.service || 'Not specified';
+                document.getElementById('appointmentDate').textContent = formattedDate || 'Not specified';
+                document.getElementById('email').textContent = bookingDetails.email || 'Not provided';
+                document.getElementById('phone').textContent = bookingDetails.phone || 'Not provided';
+            } else {
+                // If no booking details found, show a message
+                document.getElementById('bookingDetails').innerHTML = `
+                    <p>We've received your booking request. You'll receive a confirmation email shortly.</p>
+                    <p>If you have any questions, please contact us at <a href="mailto:info@qleancutz.co.ke">info@qleancutz.co.ke</a> or call us at <a href="tel:0714172749">0714 172749</a>.</p>
+                `;
+            }
+            
+            // Clear the booking details from session storage
+            sessionStorage.removeItem('bookingDetails');
+        });
+    </script>
+    <style>
+        .booking-details {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-align: left;
+        }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .detail-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #555;
+            margin-right: 0.5rem;
+        }
+        
+        .detail-value {
+            color: #333;
+        }
+        
+        .confirmation-note {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+            color: #666;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .print-btn {
+            background: #666;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .print-btn:hover {
+            background: #444;
+        }
+        
+        @media print {
+            .print-btn {
+                display: none;
+            }
+            
+            .thank-you {
+                padding: 0;
+            }
+            
+            .booking-details {
+                box-shadow: none;
+                padding: 0;
+            }
+            
+            .confirmation-note {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </body>
 </html>

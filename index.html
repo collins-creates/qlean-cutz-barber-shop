@@ -67,7 +67,48 @@
     <section id="gallery" class="gallery">
         <h2>Our Work</h2>
         <div class="gallery-grid">
-            <!-- Gallery items will be added via JavaScript -->
+            <div class="gallery-item">
+                <img src="images/barber1.jpg" alt="Barber Shop Interior">
+                <div class="overlay">
+                    <h3>Modern Interior</h3>
+                    <p>Our comfortable waiting area</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/barber2.jpg" alt="Haircut Service">
+                <div class="overlay">
+                    <h3>Haircut</h3>
+                    <p>Precision cutting</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/barber3.jpg" alt="Beard Trimming">
+                <div class="overlay">
+                    <h3>Beard Grooming</h3>
+                    <p>Professional beard care</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/barber4.jpg" alt="Customer Service">
+                <div class="overlay">
+                    <h3>Customer Service</h3>
+                    <p>Personalized attention</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/barber5.jpg" alt="Styling">
+                <div class="overlay">
+                    <h3>Styling</h3>
+                    <p>Perfect finish</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/barber6.jpg" alt="Final Look">
+                <div class="overlay">
+                    <h3>Final Look</h3>
+                    <p>Satisfied customers</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -116,7 +157,7 @@
                         <a href="#"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
-                <form class="booking-form" action="https://formspree.io/f/xpwrqkkp" method="POST">
+                <form id="bookingForm" class="booking-form" onsubmit="handleSubmit(event)">
                     <input type="text" name="name" placeholder="Your Name" required>
                     <input type="email" name="email" placeholder="Your Email" required>
                     <input type="tel" name="phone" placeholder="Your Phone" required>
@@ -127,9 +168,8 @@
                         <option value="Full Service">Full Service - KSh 250</option>
                     </select>
                     <input type="datetime-local" name="appointment_date" required>
-                    <input type="hidden" name="_subject" value="New Booking Request">
-                    <input type="hidden" name="_next" value="https://qlean-cutz-barber-shop.vercel.app/thank-you.html">
                     <button type="submit" class="btn">Book Now</button>
+                    <div id="formStatus"></div>
                 </form>
             </div>
         </div>
@@ -142,5 +182,59 @@
         </div>
     </footer>
 
+    <script>
+        async function handleSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formStatus = document.getElementById('formStatus');
+            
+            try {
+                // Store form data in session storage for the thank you page
+                const formData = new FormData(form);
+                const bookingData = {};
+                formData.forEach((value, key) => {
+                    bookingData[key] = value;
+                });
+                
+                // Format the date for display
+                if (bookingData.appointment_date) {
+                    const date = new Date(bookingData.appointment_date);
+                    bookingData.formattedDate = date.toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                }
+                
+                sessionStorage.setItem('bookingDetails', JSON.stringify(bookingData));
+                
+                // Submit to Formspree
+                const response = await fetch('https://formspree.io/f/xpwrqkkp', {
+                    method: 'POST',
+                    body: new URLSearchParams(new FormData(form)).toString(),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Redirect to thank you page
+                    window.location.href = 'thank-you.html';
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                formStatus.textContent = 'There was an error submitting your booking. Please try again.';
+                formStatus.style.color = 'red';
+            }
+        }
+    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
