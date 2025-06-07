@@ -258,18 +258,121 @@
             </div>
 
             <div class="action-buttons">
-                <a href="index.html" class="btn btn-primary">
-                    <i class="fas fa-home"></i> Back to Home
-                </a>
-                <button onclick="window.print()" class="btn btn-secondary">
+                <button onclick="window.print()" class="btn print-btn">
                     <i class="fas fa-print"></i> Print Confirmation
                 </button>
+                <a href="index.html" class="btn">Back to Home</a>
+            </div>
+            
+            <!-- Rating Section -->
+            <div class="rating-section">
+                <h3>How was your experience?</h3>
+                <p>We'd love to hear your feedback to help us improve our services.</p>
+                
+                <div class="rating-stars">
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+                </div>
+                <div id="ratingFeedback" class="rating-feedback"></div>
+                
+                <div class="rating-form" style="display: none;">
+                    <textarea id="reviewText" placeholder="Tell us more about your experience (optional)" rows="3"></textarea>
+                    <button onclick="submitRating()" class="btn">Submit Review</button>
+                </div>
             </div>
         </div>
     </section>
     <script>
-        // Get booking details from session storage
+        let selectedRating = 0;
+        
+        function setupRatingStars() {
+            const stars = document.querySelectorAll('.star');
+            const ratingFeedback = document.getElementById('ratingFeedback');
+            const ratingForm = document.querySelector('.rating-form');
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    selectedRating = parseInt(this.getAttribute('data-rating'));
+                    updateStars(selectedRating);
+                    
+                    // Show feedback based on rating
+                    const feedbacks = [
+                        'Not good',
+                        'Could be better',
+                        'Good',
+                        'Very good',
+                        'Excellent!'
+                    ];
+                    ratingFeedback.textContent = feedbacks[selectedRating - 1];
+                    
+                    // Show the review form
+                    ratingForm.style.display = 'block';
+                    
+                    // Scroll to rating form
+                    ratingForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+                
+                star.addEventListener('mouseover', function() {
+                    if (!star.classList.contains('active')) {
+                        const hoverRating = parseInt(this.getAttribute('data-rating'));
+                        updateStars(hoverRating, true);
+                    }
+                });
+                
+                star.addEventListener('mouseout', function() {
+                    updateStars(selectedRating);
+                });
+            });
+            
+            function updateStars(rating, isHover = false) {
+                stars.forEach(star => {
+                    const starRating = parseInt(star.getAttribute('data-rating'));
+                    if (isHover) {
+                        star.classList.toggle('hover', starRating <= rating);
+                    } else {
+                        star.classList.toggle('active', starRating <= rating);
+                        star.classList.remove('hover');
+                    }
+                });
+            }
+        }
+        
+        function submitRating() {
+            const reviewText = document.getElementById('reviewText').value;
+            const bookingDetails = JSON.parse(sessionStorage.getItem('bookingDetails') || '{}');
+            
+            // Here you would typically send this data to your server
+            // For now, we'll just show a thank you message
+            const ratingSection = document.querySelector('.rating-section');
+            ratingSection.innerHTML = `
+                <div class="rating-success">
+                    <i class="fas fa-check-circle" style="font-size: 3rem; color: #4CAF50; margin-bottom: 1rem;"></i>
+                    <h3>Thank You for Your Feedback!</h3>
+                    <p>We appreciate you taking the time to rate your experience. Your feedback helps us improve our services.</p>
+                    <p>You rated us: ${'★'.repeat(selectedRating)}${'☆'.repeat(5-selectedRating)}</p>
+                    ${reviewText ? `<p>Your comment: "${reviewText}"</p>` : ''}
+                </div>
+            `;
+            
+            // In a real app, you would send this data to your server:
+            // const formData = {
+            //     ...bookingDetails,
+            //     rating: selectedRating,
+            //     review: reviewText,
+            //     timestamp: new Date().toISOString()
+            // };
+            // fetch('/api/ratings', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(formData)
+            // });
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
+            setupRatingStars();
             const bookingDetails = JSON.parse(sessionStorage.getItem('bookingDetails'));
             const bookingCard = document.querySelector('.booking-card');
             const thankYouSection = document.querySelector('.thank-you-section');
@@ -437,6 +540,87 @@
             .details-grid {
                 grid-template-columns: 1fr;
             }
+        }
+        
+        /* Rating Styles */
+        .rating-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #f9f9f9;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+        
+        .rating-section h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .rating-section p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .rating-stars {
+            font-size: 2.5rem;
+            color: #ddd;
+            margin: 1rem 0;
+            cursor: pointer;
+        }
+        
+        .rating-stars .star {
+            transition: color 0.2s, transform 0.2s;
+            display: inline-block;
+            margin: 0 2px;
+        }
+        
+        .rating-stars .star:hover,
+        .rating-stars .star.active,
+        .rating-stars .star.hover {
+            color: #ffc107;
+            transform: scale(1.2);
+        }
+        
+        .rating-feedback {
+            margin: 1rem 0;
+            min-height: 1.5rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .rating-form {
+            margin-top: 1.5rem;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .rating-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        .rating-form button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .rating-form button:hover {
+            background: #c19a3c;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </body>
