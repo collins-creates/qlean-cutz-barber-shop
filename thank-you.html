@@ -3,87 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You - Qlean Cutz Barbershop</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Thank You - Qlean Cutz Barber Shop</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .thank-you {
+        /* Thank You Page Specific Styles */
+        .thank-you-section {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+
+        .thank-you-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            max-width: 800px;
+            width: 100%;
             text-align: center;
-            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
         }
-        .thank-you i {
+
+        .thank-you-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #d4af37, #f1c40f);
+        }
+
+        .thank-you-icon {
             font-size: 5rem;
-            color: #d4af37;
-            margin-bottom: 2rem;
-        }
-        .thank-you h1 {
+            color: #27ae60;
             margin-bottom: 1.5rem;
+            animation: bounce 1s ease infinite alternate;
         }
-        .thank-you p {
+
+        @keyframes bounce {
+            to { transform: translateY(-10px); }
+        }
+
+        .thank-you-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .thank-you-subtitle {
+            color: #7f8c8d;
             font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #555;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
         }
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #d4af37;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
+
+        .booking-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .booking-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #ecf0f1;
+            font-size: 1.4rem;
             font-weight: 600;
-            transition: all 0.3s ease;
         }
-        .btn:hover {
-            background: #b38f00;
-            transform: translateY(-3px);
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .detail-item {
+            margin-bottom: 1rem;
+        }
+
+        .detail-label {
+            display: block;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 1.05rem;
+            word-break: break-word;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #d4af37, #f1c40f);
+            color: white;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e6e9;
+            transform: translateY(-2px);
+        }
+
+        .confirmation-note {
+            background: #e8f5e9;
+            color: #27ae60;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .confirmation-note i {
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .thank-you-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .thank-you-title {
+                font-size: 2rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media print {
+            .thank-you-section {
+                padding: 0;
+                background: none;
+            }
+
+            .thank-you-container {
+                box-shadow: none;
+                padding: 0;
+            }
+
+            .action-buttons {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="thank-you">
-            <i class="fas fa-check-circle"></i>
-            <h1>Thank You for Your Booking!</h1>
-            <div id="bookingDetails" class="booking-details">
-                <p>Your booking details have been received. Here's a summary:</p>
-                <div class="details-grid">
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">Qlean Cutz</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#gallery">Gallery</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Thank You Section -->
+    <section class="thank-you-section">
+        <div class="thank-you-container">
+            <div class="thank-you-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1 class="thank-you-title">Booking Confirmed!</h1>
+            <p class="thank-you-subtitle">Thank you for choosing Qlean Cutz. Your appointment has been successfully scheduled.</p>
+
+            <div class="booking-card">
+                <h3><i class="far fa-calendar-check"></i> Appointment Details</h3>
+                <div class="detail-grid">
                     <div class="detail-item">
-                        <span class="detail-label">Name:</span>
-                        <span id="customerName" class="detail-value"></span>
+                        <span class="detail-label">Name</span>
+                        <div id="customerName" class="detail-value"></div>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">Service:</span>
-                        <span id="service" class="detail-value"></span>
+                        <span class="detail-label">Service</span>
+                        <div id="service" class="detail-value"></div>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">Date & Time:</span>
-                        <span id="appointmentDate" class="detail-value"></span>
+                        <span class="detail-label">Date & Time</span>
+                        <div id="appointmentDate" class="detail-value"></div>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">Email:</span>
-                        <span id="email" class="detail-value"></span>
+                        <span class="detail-label">Email</span>
+                        <div id="email" class="detail-value"></div>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">Phone:</span>
-                        <span id="phone" class="detail-value"></span>
+                        <span class="detail-label">Phone</span>
+                        <div id="phone" class="detail-value"></div>
                     </div>
                 </div>
-                <p class="confirmation-note">We've sent a confirmation to your email. Please arrive 5 minutes before your appointment.</p>
+
+                <div class="confirmation-note">
+                    <i class="fas fa-info-circle"></i>
+                    We've sent a confirmation to your email. Please arrive 5-10 minutes before your appointment.
+                </div>
             </div>
+
             <div class="action-buttons">
-                <a href="index.html" class="btn">Back to Home</a>
-                <button onclick="window.print()" class="btn print-btn">
+                <a href="index.html" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <button onclick="window.print()" class="btn btn-secondary">
                     <i class="fas fa-print"></i> Print Confirmation
                 </button>
             </div>
         </div>
-    </div>
+    </section>
     <script>
         // Get booking details from session storage
         document.addEventListener('DOMContentLoaded', function() {
             const bookingDetails = JSON.parse(sessionStorage.getItem('bookingDetails'));
-            
+            const bookingCard = document.querySelector('.booking-card');
+            const thankYouSection = document.querySelector('.thank-you-section');
+
             if (bookingDetails) {
                 // Format the datetime for display
                 const date = new Date(bookingDetails.appointment_date);
@@ -93,7 +283,8 @@
                     month: 'long',
                     day: 'numeric',
                     hour: '2-digit',
-                    minute: '2-digit'
+                    minute: '2-digit',
+                    hour12: true
                 });
                 
                 // Update the DOM with booking details
@@ -102,16 +293,68 @@
                 document.getElementById('appointmentDate').textContent = formattedDate || 'Not specified';
                 document.getElementById('email').textContent = bookingDetails.email || 'Not provided';
                 document.getElementById('phone').textContent = bookingDetails.phone || 'Not provided';
+                
+                // Show the booking card
+                if (bookingCard) bookingCard.style.display = 'block';
             } else {
-                // If no booking details found, show a message
-                document.getElementById('bookingDetails').innerHTML = `
-                    <p>We've received your booking request. You'll receive a confirmation email shortly.</p>
-                    <p>If you have any questions, please contact us at <a href="mailto:info@qleancutz.co.ke">info@qleancutz.co.ke</a> or call us at <a href="tel:0714172749">0714 172749</a>.</p>
+                // If no booking details found, show a fallback message
+                const fallbackHTML = `
+                    <div class="no-booking">
+                        <div class="thank-you-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h2 class="thank-you-title">Booking Information</h2>
+                        <p class="thank-you-subtitle">We've received your booking request. You'll receive a confirmation email shortly.</p>
+                        <div class="contact-info">
+                            <p>If you have any questions, please contact us at:</p>
+                            <p><i class="fas fa-envelope"></i> <a href="mailto:info@qleancutz.co.ke">info@qleancutz.co.ke</a></p>
+                            <p><i class="fas fa-phone"></i> <a href="tel:0714172749">0714 172749</a></p>
+                        </div>
+                    </div>
                 `;
+                
+                if (thankYouSection) {
+                    thankYouSection.innerHTML = `
+                        <div class="thank-you-container">
+                            ${fallbackHTML}
+                            <div class="action-buttons" style="margin-top: 2rem;">
+                                <a href="index.html" class="btn btn-primary">
+                                    <i class="fas fa-home"></i> Back to Home
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }
             }
             
-            // Clear the booking details from session storage
-            sessionStorage.removeItem('bookingDetails');
+            // Clear the booking details from session storage after a short delay
+            // to ensure the page loads with the data
+            setTimeout(() => {
+                sessionStorage.removeItem('bookingDetails');
+            }, 1000);
+            
+            // Add print styles
+            const style = document.createElement('style');
+            style.textContent = `
+                @media print {
+                    .action-buttons, .no-booking .thank-you-icon {
+                        display: none !important;
+                    }
+                    .thank-you-container {
+                        padding: 0 !important;
+                        box-shadow: none !important;
+                    }
+                    .booking-card {
+                        box-shadow: none !important;
+                        border: 1px solid #eee;
+                        page-break-inside: avoid;
+                    }
+                    body {
+                        background: white !important;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
         });
     </script>
     <style>
