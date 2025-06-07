@@ -293,19 +293,8 @@ nav ul li a:hover {
 /* Gallery Section */
 .gallery {
     padding: 5rem 0;
-    background: #fff;
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
-    padding: 0 1rem;
-}
-
-.gallery {
-    padding: 5rem 0;
     background: #f9f9f9;
+    text-align: center;
 }
 
 .gallery h2 {
@@ -320,6 +309,8 @@ nav ul li a:hover {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     padding: 0 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .gallery-item {
@@ -328,11 +319,8 @@ nav ul li a:hover {
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover {
-    transform: translateY(-10px) scale(1.03);
+    transition: all 0.3s ease;
+    background: #fff;
 }
 
 .gallery-item img {
