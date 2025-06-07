@@ -33,8 +33,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Gallery images - using local assets
 const galleryImages = [
-    './assets/Capture.JPG',
-    './assets/Capture 2.JPG'
+    '/assets/Capture.JPG',
+    '/assets/Capture 2.JPG'
     // Add more images here as you add them to the assets folder
 ];
 
